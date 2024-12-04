@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Analysis</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Product Analysis</h1>
+
+        <!-- Hiển thị các cặp sản phẩm thường xuyên mua cùng nhau -->
+        <h2>Frequently Bought Together</h2>
+        <img src="data:image/png;base64,{{ image_data }}" alt="Product Analysis">
+        <a href="{{ url_for('index') }}">Quay Lại Trang Chính</a>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Antecedents (Products)</th>
+                    <th>Consequents (Products)</th>
+                    <th>Support</th>
+                    <th>Confidence</th>
+                    <th>Lift</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pair in product_pairs %}
+                <tr>
+                    <td>{{ pair['antecedents'] }}</td>
+                    <td>{{ pair['consequents'] }}</td>
+                    <td>{{ pair['support'] | round(4) }}</td>
+                    <td>{{ pair['confidence'] | round(4) }}</td>
+                    <td>{{ pair['lift'] | round(4) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
